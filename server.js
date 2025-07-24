@@ -7,6 +7,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ✅ Root route to test if backend is live
+app.get('/', (req, res) => {
+  res.send('🟢 Backend is live and running!');
+});
+
 // 🔧 Create table if it doesn't exist
 const createTable = async () => {
   try {
