@@ -186,3 +186,18 @@ app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
   await createTables();
 });
+
+// ❌ Missing in your current code — add this
+app.delete('/projects/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Delete the project and its related tasks/files (due to ON DELETE CASCADE)
+    await pool.query('DELETE FROM projects WHERE id = $1', [id]);
+
+    res.status(204).send(); // No content
+  } catch (err) {
+    console.error('❌ Delete project error:', err.message);
+    res.status(500).send('Error deleting project');
+  }
+});
