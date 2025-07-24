@@ -111,7 +111,7 @@ app.get('/projects/:id/completion', async (req, res) => {
     const doneTasks = parseInt(done[0].count);
     const percentage = totalTasks === 0 ? 0 : Math.round((doneTasks / totalTasks) * 100);
 
-    res.json({ completion: percentage });
+    res.json({ percentage: percentage });
   } catch (err) {
     res.status(500).send('Error calculating completion');
   }
